@@ -1,9 +1,13 @@
-$(document).ready(function(){
-    var iframe = $('#player1')[0],
-    player = $f(iframe),
-    status = $('.status');
+var iframe = $('#player1')[0],
+player = $f(iframe),
+status = $('.status');
 
-    $("#player1").fitVids();
+var log = log4javascript.getLogger();
+var ajaxAppender = new log4javascript.AjaxAppender("/talkscape/ajax-add-log.php");
+log.addAppender(ajaxAppender);
+
+$(document).ready(function(){
+    //$("#player1").fitVids();
 
     $("#add-highlight-button").click(function(){
         $(".add-highlight").show("slow");
@@ -26,7 +30,8 @@ $(document).ready(function(){
                 $(".add-highlight img").html("capture failed."); 
             }).always(function(){
             });  
-            });        
+        });        
+        log.info(formatLog($("body").data("talk_id"), "anonymous", "click", "add-highlight-button", ""));      
     });
 
     $("#save-highlight-button").click(function(){
@@ -51,18 +56,21 @@ $(document).ready(function(){
         );    
         $(".add-highlight").hide("slow");
         $("#add-highlight-button").removeClass("disabled");
-
+        log.info(formatLog($("body").data("talk_id"), "anonymous", "click", "save-highlight-button", ""));      
     });
 
     $("#cancel-highlight-button").click(function(){
         $(".add-highlight").hide("slow");
         $("#add-highlight-button").removeClass("disabled");       
+        log.info(formatLog($("body").data("talk_id"), "anonymous", "click", "cancel-highlight-button", ""));      
     });   
 
     $(".highlights li a").click(function(){
         var seconds = Math.floor($(this).parent().data("start_at"));
         if (isInt(seconds))
             player.api("seekTo", seconds);
+
+        log.info(formatLog($("body").data("talk_id"), "anonymous", "click", "highlight", $(this).parent().data("id")));      
     }); 
 
     $(".highlights").on("mouseenter", "li a", function(event){    
@@ -75,11 +83,13 @@ $(document).ready(function(){
 
     $(".toc").on("click", "li .open-detail", function(){
         triggerDetail($(this), true);
+        log.info(formatLog($("body").data("talk_id"), "anonymous", "click", "toc-open-detail", $(this).parent().data("id")));      
         return false;
     });
 
     $(".toc").on("click", "li .close-detail", function(){
         triggerDetail($(this), false);
+        log.info(formatLog($("body").data("talk_id"), "anonymous", "click", "toc-close-detail", $(this).parent().data("id"))); 
         return false;
     });   
 
@@ -87,6 +97,7 @@ $(document).ready(function(){
         var seconds = Math.floor($(this).parent().data("start_at"));
         if (isInt(seconds))
             player.api("seekTo", seconds);
+        log.info(formatLog($("body").data("talk_id"), "anonymous", "click", "toc", $(this).parent().data("id"))); 
     }); 
 
     $("#get-time-button").click(function(){
@@ -99,6 +110,7 @@ $(document).ready(function(){
     $(".pager .previous").click(function(){
         var $active = $(".toc li.active").first();
         $active.prev().find("a").trigger("click");
+        log.info(formatLog($("body").data("talk_id"), "anonymous", "click", "toc-previous", "")); 
     });
 
     $(".pager .next").click(function(){
@@ -107,51 +119,37 @@ $(document).ready(function(){
             $(".toc li").first().find("a").trigger("click");
         else
             $active.next().find("a").trigger("click");
+        log.info(formatLog($("body").data("talk_id"), "anonymous", "click", "toc-next", ""));
     });
 
     // When the player is ready, add listeners for pause, finish, and playProgress
     player.addEvent('ready', function() {
-        //status.text('ready');
-        
-        //player.addEvent('pause', onPause);
-        //player.addEvent('finish', onFinish);
+        player.addEvent('play', onPlay);
+        player.addEvent('pause', onPause);
+        player.addEvent('finish', onFinish);
         player.addEvent('playProgress', onPlayProgress);
         player.addEvent('seek', onSeek);
     });
 
-    // Call the API when a button is pressed
-    /*
-    $('button').bind('click', function() {
-        player.api($(this).text().toLowerCase());
-    });
-    
+    function onPlay(id) {
+        log.info(formatLog($("body").data("talk_id"), "anonymous", "pause", "player", ""));
+    }
+
     function onPause(id) {
-        status.text('paused');
-        console.log('paused');
+        log.info(formatLog($("body").data("talk_id"), "anonymous", "pause", "player", ""));
     }
 
     function onFinish(id) {
-        status.text('finished');
+        log.info(formatLog($("body").data("talk_id"), "anonymous", "finish", "player", ""));
     }
-    */
+    
     function onPlayProgress(data, id) {
         updateActive(Math.floor(data.seconds));
-        /*
-        status.text(data.seconds + 's played');
-        var $current = $(".toc li.active").first();
-        var $next = $current.next();
-        //console.log($next.data("start_at"), Math.floor(data.seconds));
-        if ($next.data("start_at") <= Math.floor(data.seconds) + 2){
-            $current.removeClass("active");
-            $next.addClass("active");
-            $current.find("i").trigger("click");
-            $next.find("i").trigger("click");
-        }
-        */
     }
 
     function onSeek(data, id) {
         updateActive(Math.floor(data.seconds));
+        log.info(formatLog($("body").data("talk_id"), "anonymous", "seek", "player", ""));
     }
 });
 

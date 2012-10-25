@@ -1,3 +1,24 @@
+
+/*  message format: JSON
+    - talk_id
+    - user_id
+    - action
+    - object type
+    - object id
+*/
+function formatLog(talk_id, user_id, action, target, obj){
+  var json = {
+    "talk_id": talk_id,
+    "user_id": user_id,
+    "action": action,
+    "target": target,
+    "obj": obj
+  }
+  //console.log(JSON.stringify(json));
+  return JSON.stringify(json);
+}
+
+
 // Return a label that is closest to the given 'seconds'
 function findCurrentLabel(seconds, tolerance){
     var $current = $();

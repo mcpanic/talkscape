@@ -66,7 +66,7 @@
 
         <script src="/talkscape/js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
     </head>
-    <body>
+    <body data-talk_id="<?php echo $talk->id;?>">
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
         <![endif]-->
@@ -91,7 +91,8 @@
                     </a>
                     
                     <div class="row">
-                        <a class="brand" href="#">TalkScape</a>
+                        <a class="brand" href="/talkscape/">TalkScape</a>
+                        <!--
                         <div class="nav-collapse collapse"> 
                         <ul class="nav">
                             <li><a href="#">List</a></li>
@@ -99,6 +100,7 @@
                             <li><a href="#contact">Contact</a></li>
                         </ul>
                         </div>                    
+                        -->
                     </div>
 
                     <div class="row">    
@@ -117,7 +119,7 @@
                             <span class='st_fblike_large' displayText='Facebook Like'></span>
                             <span class='st_twitter_large' displayText='Tweet'></span>
                             <span class='st_email_large' displayText='Email'></span>
-                        -->
+                            -->
                             <?php 
                                 echo $talk->getHTML();
                             ?>
@@ -195,8 +197,6 @@
                             <li>교육의 민주화</li>
                         </ul>
                     </ul>
-                    <p>Video status: <span class="status">...</span></p>
-                    <p><button>Play</button> <button>Pause</button></p>
                 </div>
                 
                 <div class="span4">
@@ -217,15 +217,13 @@
 
         <script src="/talkscape/js/vendor/bootstrap.min.js"></script>        
         <script src="http://a.vimeocdn.com/js/froogaloop2.min.js"></script>
-        <script src="/talkscape/js/vendor/jquery.fitvids.js"></script>
+        <script src="/talkscape/js/vendor/log4javascript.js"></script>
+        <!--<script src="/talkscape/js/vendor/jquery.fitvids.js"></script>-->
         <script src="/talkscape/js/utils.js"></script>
         <script src="/talkscape/js/main.js"></script>
 
-        <script>
-         
-        </script>
-
         <script type="text/javascript">
+        log.info(formatLog($("body").data("talk_id"), "anonymous", "view", "open", "page"));      
 
           var _gaq = _gaq || [];
           _gaq.push(['_setAccount', 'UA-35846694-1']);

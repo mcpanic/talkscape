@@ -13,7 +13,6 @@ function getTimeDisplay($seconds){
   return $text;
 }
 
-
 function time2str($ts) {
    
     if(!ctype_digit($ts))
