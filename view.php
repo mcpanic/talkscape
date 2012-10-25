@@ -5,7 +5,7 @@
     include "class.Highlight.php";
 
     $slug = isset($_GET["slug"]) ? $_GET["slug"] : "";
-    echo $slug;
+
     $conn->query("SET NAMES utf8");
 
     $stmt = $conn->prepare("SELECT * from talks WHERE slug=:slug");  
@@ -13,7 +13,6 @@
     $stmt->execute(array('slug' => $slug));
     while($obj = $stmt->fetch()) {          
         $talk = $obj;
-        echo $talk;
     }
 
     $stmt = $conn->prepare("SELECT * from labels WHERE talk_id=:id ORDER BY start_at ASC");  
@@ -131,9 +130,6 @@
         </div>
 
         <div class="container">
-<?php echo "slug" . $slug; ?>
-
-
             <!-- Example row of columns -->
             <div class="row">
                 <div class="span4">
