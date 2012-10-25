@@ -13,7 +13,7 @@ class Label{
 	public $duration;
 	public $detail;
 
-	function __construct($id){
+	function __construct(){
 		//$this->id = $id;
 
 	}

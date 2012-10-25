@@ -80,7 +80,7 @@
 
                         <div class="row">    
                             <div class="span9">
-                            <iframe id="player1" src="<?php echo $?>?api=1&player_id=player1" width="700px" height="400px" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+                            
                             </div>
                             <div class="span3">
                                 <?php 

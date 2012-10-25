@@ -16,7 +16,7 @@ class Talk{
 	public $affiliation;
 	public $event;
 
-	function __construct($id){
+	function __construct(){
 		//$this->id = $id;
 
 	}

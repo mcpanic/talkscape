@@ -9,7 +9,7 @@ class Highlight{
 	public $thumbnail_link;
 	public $owner;
 
-	function __construct($id){
+	function __construct(){
 		//$this->id = $id;
 	}
 
