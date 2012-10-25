@@ -1,7 +1,15 @@
+<IfModule mod_rewrite.c>
 RewriteEngine on
-RewriteBase /talkscape/
-RewriteRule     ^view/(.+)(/|)$         view.php?slug=$1   [L]
-RewriteRule     ^manage-talk/(.+)(/|)$         manage-talk.php?slug=$1   [L]
-RewriteRule     ^manage-labels/(.+)(/|)$         manage-labels.php?slug=$1   [L]
-RewriteRule     ^add(/|)$          		add-talk.php   [L]
-RewriteRule		^[^.]*$					index.php	[L]
+#RewriteBase /talkscape/
+
+# ignore existing files (only apply to non-file)
+RewriteCond %{REQUEST_FILENAME} !-f
+# ignore folders (only apply to non-folder)
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule 	^v/(.*)(/|)$ 		view.php?slug=$1 [L]
+RewriteRule     ^talk/(.+)(/|)$    	manage-talk.php?slug=$1   [L]
+RewriteRule     ^labels/(.+)(/|)$       manage-labels.php?slug=$1   [L]
+RewriteRule     ^add(/|)$          	add-talk.php   [L]
+RewriteRule	^[^.]*$			index.php	[L]
+</IfModule>
