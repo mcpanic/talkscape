@@ -1,0 +1,92 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+/* Table of Contents */
+.toc li a{
+	padding: 10px;
+}
+
+.toc .label {
+	margin-right: 10px;
+}
+
+.toc .icon-chevron-down {
+	float: right;
+	margin-top: 25x;
+	margin-right: 5px;
+	opacity: .25;
+}
+
+.toc .icon-chevron-up {
+	float: right;
+	margin-top: 5px;
+	margin-right: 5px;
+	opacity: .25;
+}
+
+.toc .active .icon-chevron-down {
+	opacity: 1;
+}
+
+.toc .detail {
+	background-color: #eeeeee;
+	display: none;
+	padding: 10px;
+}
+
+/* Highlights */
+.highlights {
+	margin-top: 30px; 
+}
+.highlights li {
+	margin-bottom: 15px;
+}
+
+.highlights li a{
+	position: relative;
+	display: block;
+	overflow: hidden;
+}
+
+.highlights .thumb {
+	width: 120px;
+	float: left;
+	position: relative; 
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.highlights .info {
+	display: block;
+	width: auto;
+	max-height: 4.5em;
+	overflow: hidden;
+}
+
+.add-highlight {
+	display: none;
+	background-color: #eeeeee;
+	padding: 10px;
+}
+
+.add-highlight .owner input {
+	margin-top: 10px;
+}
+
+.highlights .overlay-play {
+	position: absolute;
+	display: none;
+	z-index:5;
+	width: 80px;
+	height: 80px;
+	top: 0;
+	left: 30px;
+	margin: 4px;
+	background:url(../img/play-circle.png) no-repeat center center;
+	background-size:45px 45px;
+	opacity:0.8;
+	cursor: pointer;
+}

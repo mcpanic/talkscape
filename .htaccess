@@ -1,0 +1,7 @@
+RewriteEngine on
+RewriteBase /talkscape/
+RewriteRule     ^view/(.+)(/|)$         view.php?slug=$1   [L]
+RewriteRule     ^manage-talk/(.+)(/|)$         manage-talk.php?slug=$1   [L]
+RewriteRule     ^manage-labels/(.+)(/|)$         manage-labels.php?slug=$1   [L]
+RewriteRule     ^add(/|)$          		add-talk.php   [L]
+RewriteRule		^[^.]*$					index.php	[L]

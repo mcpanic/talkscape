@@ -1,0 +1,90 @@
+<?php
+include "conn.php";
+include "class.Highlight.php";
+$conn->query("SET NAMES utf8");
+$success = true;
+$html = "";
+
+if ($_POST["action"] == "create"){
+	try {
+	  $stmt = $conn->prepare('INSERT INTO highlights (talk_id, title, start_at, thumbnail_link, owner) VALUES(:talk_id, :title, :start_at, :thumbnail_link, :owner)');
+	  $stmt->bindParam(':talk_id', $_POST["talk_id"], PDO::PARAM_INT);
+	  $stmt->bindParam(':title', $_POST["title"], PDO::PARAM_STR);
+	  $stmt->bindParam(':start_at', $_POST["start_at"], PDO::PARAM_STR);
+	  $stmt->bindParam(':thumbnail_link', $_POST["thumbnail_link"], PDO::PARAM_STR);
+	  $stmt->bindParam(':owner', $_POST["owner"], PDO::PARAM_STR);
+	  $stmt->execute();
+	  if ($stmt->rowCount() != 1)
+	  	$success = false;
+	  else {
+	  	$stmt2 = $conn->prepare("SELECT * from highlights WHERE id=:id");  
+	    $stmt2->setFetchMode(PDO::FETCH_CLASS, "Highlight");
+	    $stmt2->execute(array('id' => $conn->lastInsertId()));  
+	    while($obj = $stmt2->fetch()) {          
+	        $highlight = $obj;
+	    }  
+	    $html = $highlight->getHTML();	    
+	    $json = array(
+	      "id"=>$highlight->id,
+	      "start_at"=>$highlight->start_at,
+		  "html"=>$html,
+		  "success"=>$success
+		);
+	  }
+	} catch(PDOException $e) {
+		$success = false;
+	  	file_put_contents('log/database.log',  date("Y-m-d H:i:s") . " " . $e->getMessage() . "\n", FILE_APPEND);  
+	}
+
+} else if ($_POST["action"] == "update"){
+	try {
+	  $stmt = $conn->prepare('UPDATE highlights SET title=:title, start_at=:start_at, thumbnail_link=:thumbnail_link, owner=:owner WHERE id=:id');
+	  $stmt->bindParam(':id', $_POST["id"], PDO::PARAM_INT);
+	  $stmt->bindParam(':title', $_POST["title"], PDO::PARAM_STR);
+	  $stmt->bindParam(':start_at', $_POST["start_at"], PDO::PARAM_STR);
+	  $stmt->bindParam(':thumbnail_link', $_POST["thumbnail_link"], PDO::PARAM_STR);
+	  $stmt->bindParam(':owner', $_POST["owner"], PDO::PARAM_STR);	  
+	  $stmt->execute();
+
+	  // not checking for rowCount == 1, because if duplicate info was inserted for save, it will return 0.
+	  	$stmt2 = $conn->prepare("SELECT * from highlights WHERE id=:id");  
+	    $stmt2->setFetchMode(PDO::FETCH_CLASS, "Highlight");
+	    $stmt2->execute(array('id' => $_POST["id"]));  
+	    while($obj = $stmt2->fetch()) {          
+	        $highlight = $obj;
+	    }  
+	    $html = $highlight->getHTML();
+	    $json = array(
+	      "id"=>$highlight->id,
+	      "start_at"=>$highlight->start_at,
+		  "html"=>$html,
+		  "success"=>$success
+		);	    
+	} catch(PDOException $e) {
+		$success = false;
+	  	file_put_contents('log/database.log',  date("Y-m-d H:i:s") . " " . $e->getMessage() . "\n", FILE_APPEND);  
+	}
+
+} else if ($_POST["action"] == "delete"){
+	try {
+	  $stmt = $conn->prepare('DELETE FROM highlights WHERE id=:id');
+	  $stmt->execute(array(
+	    'id' => $_POST["id"]
+	  ));
+	  if ($stmt->rowCount() != 1)
+	  	$success = false;
+	  else {
+	  	$json = array(
+		  "success"=>$success
+		);
+	  }
+	} catch(PDOException $e) {
+		$success = false;
+	  	file_put_contents('log/database.log',  date("Y-m-d H:i:s") . " " . $e->getMessage() . "\n", FILE_APPEND);  
+	}
+}
+
+
+echo json_encode($json);
+
+?>
