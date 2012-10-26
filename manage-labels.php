@@ -32,14 +32,14 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
+        <title>Manage chapters | TalkScape</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
         <link rel="stylesheet" href="/talkscape/css/bootstrap.min.css">
         <style>
             body {
-                padding-top: 500px;
+                padding-top: 60px;
                 padding-bottom: 40px;
             }
 
@@ -72,15 +72,17 @@
 
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
-                <div class="container">
+                <div class="container">       
+                    <!--     
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    
+                    -->
                     <div class="row">
-                        <a class="brand" href="#">TalkScape</a>
+                        <a class="brand" href="/talkscape/">TalkScape</a>
+                        <!--
                         <div class="nav-collapse collapse"> 
                         <ul class="nav">
                             <li><a href="#">List</a></li>
@@ -88,37 +90,28 @@
                             <li><a href="#contact">Contact</a></li>
                         </ul>
                         </div>                    
+                        -->
                     </div>
-
-                    <div class="row">    
-                        <div class="span8">
-                        <h4><?php echo $talk->title; ?></h4>
-                        <iframe id="player1" src="<?php echo $talk->video_link; ?>?api=1&player_id=player1" width="100%" height="400px" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-                        </div>
-                        <div class="span4">
-                            <!--
-                            <span class="fb-like" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" style="vertical-align:top;zoom:1;*display:inline"></span>
-                            <span>
-                            <a href="https://twitter.com/share" class="twitter-share-button" data-via="imjuhokim" data-hashtags="talkscape">Tweet</a>
-                            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-                            </span>
-                            
-                            <span class='st_facebook_large' displayText='Facebook'></span>
-                            <span class='st_fblike_large' displayText='Facebook Like'></span>
-                            <span class='st_twitter_large' displayText='Tweet'></span>
-                            <span class='st_email_large' displayText='Email'></span>
-                            -->
-                            <?php 
-                                echo $talk->getHTML();
-                            ?>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
 
-        <div class="container">
+        <div class="container container-player">
+
+            <div class="row player">    
+                <div class="span8">
+                <h4><?php echo $talk->title; ?></h4>
+                <iframe id="player1" src="<?php echo $talk->video_link; ?>?api=1&player_id=player1" width="100%" height="400px" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+                </div>
+                <div class="span4">
+                    <?php 
+                        echo $talk->getHTML();
+                    ?>
+                          
+                </div>
+            </div>
+        </div>
+        <div class="container container-features">
             <!-- Example row of columns -->
             <div class="row">
                 <div class="span6">
@@ -141,19 +134,19 @@
                 </div>
                 
                 <div class="span6">
-                    <h2 id="action-label">Add a New Label</h2>
+                    <h2 id="action-label">Add a New Chapter</h2>
                     <form id="form1" class="form-horizontal">
                         <div class="control-group">
                             <label class="control-label" for="start_at">Starting Time</label>
                             <div class="controls">
                                   <input type="text" id="start_at" placeholder="starting time" class="input-small">
-                                  <button class="btn btn-primary" id="get-time-button">Get current time</button>
+                                  <button class="btn" id="get-time-button">Get current time</button>
                             </div>                                                
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="title">Title</label>
                             <div class="controls">
-                              <input type="text" id="title" placeholder="label title" class="input-xlarge">
+                              <input type="text" id="title" placeholder="chapter title" class="input-xlarge">
                             </div>
                         </div>
                     
@@ -246,19 +239,20 @@
             $(document).on("click", ".delete-link", function(e){
                 var $li = $(this).parent();
                 var id = $li.data("id");
-
-                $.post("/talkscape/crud.Label.php", { 
-                    action: "delete",
-                    id: id
-                  },
-                  function( data ) {
-                    var obj = JSON.parse(data);
-                    if (obj.success){
-                        var $li = findLabelById(id);
-                        $li.hide('slow', function(){$li.remove(); });
-                    }
-                  }
-                );
+                if (confirm("Are you sure you want to delete this chapter?")) {
+                    $.post("/talkscape/crud.Label.php", { 
+                        action: "delete",
+                        id: id
+                      },
+                      function( data ) {
+                        var obj = JSON.parse(data);
+                        if (obj.success){
+                            var $li = findLabelById(id);
+                            $li.hide('slow', function(){$li.remove(); });
+                        }
+                      }
+                    );
+                }
                 return false;  
             });
 
@@ -267,7 +261,7 @@
                 var $li = $(this).parent();
                 var id = $li.data("id");
                 
-                $("#action-label").text("Edit a Label");
+                $("#action-label").text("Edit a Chapter");
                 $("#form1 #title").val($li.find(".title").text());
                 $("#form1 #start_at").val($li.data("start_at"));
                 $("#save-button").attr("id", "update-save-button");

@@ -103,40 +103,36 @@
                         </div>                    
                         -->
                     </div>
-
-
-
-
                 </div>
             </div>
         </div>
 
         <div class="container container-player">
 
-                    <div class="row player">    
-                        <div class="span8">
-                        <h4><?php echo $talk->title; ?></h4>
-                        <iframe id="player1" src="<?php echo $talk->video_link; ?>?api=1&player_id=player1" width="100%" height="400px" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-                        </div>
-                        <div class="span4">
+            <div class="row player">    
+                <div class="span8">
+                <h3><?php echo $talk->title; ?></h3>
+                <iframe id="player1" src="<?php echo $talk->video_link; ?>?api=1&player_id=player1" width="100%" height="400px" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+                </div>
+                <div class="span4">
 
-                            <!--
-                            <span class='st_facebook_large' displayText='Facebook'></span>
-                            <span class='st_fblike_large' displayText='Facebook Like'></span>
-                            <span class='st_twitter_large' displayText='Tweet'></span>
-                            <span class='st_email_large' displayText='Email'></span>
-                            -->
-                            <?php 
-                                echo $talk->getHTML();
-                            ?>
-                            <br>
-                            <span class="fb-like" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" style="vertical-align:top;zoom:1;*display:inline"></span>
-                            <span>
-                            <a href="https://twitter.com/share" class="twitter-share-button" data-via="imjuhokim" data-hashtags="talkscape">Tweet</a>
-                            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-                            </span>                            
-                        </div>
-                    </div>
+                    <!--
+                    <span class='st_facebook_large' displayText='Facebook'></span>
+                    <span class='st_fblike_large' displayText='Facebook Like'></span>
+                    <span class='st_twitter_large' displayText='Tweet'></span>
+                    <span class='st_email_large' displayText='Email'></span>
+                    -->
+                    <?php 
+                        echo $talk->getHTML();
+                    ?>
+                    <br>
+                    <span class="fb-like" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" style="vertical-align:top;zoom:1;*display:inline"></span>
+                    <span>
+                    <a href="https://twitter.com/share" class="twitter-share-button" data-via="imjuhokim" data-hashtags="talkscape">Tweet</a>
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                    </span>                            
+                </div>
+            </div>
         </div>
         <div class="container container-features">
             <!-- Example row of columns -->
@@ -185,7 +181,7 @@
                 
                 <div class="span4">
                     <h2>Discussion</h2>
-                    <div class="fb-comments" data-href="<?php echo $currentUrl; ?>" data-num-posts="2" data-width="370" style="width:100%"></div>
+                    <div class="fb-comments" data-href="<?php echo $currentUrl; ?>" data-num-posts="5" data-width="370" style="width:100%"></div>
                 </div>
             </div>
             <hr>
