@@ -135,7 +135,9 @@
             <!-- Example row of columns -->
             <div class="row">
                 <div class="span4">
-                    <h2>Highlights</h2>
+                    <h2>Highlights 
+                        <a href="#" class="highlights-help" data-trigger="hover" data-content="Click the 'Add a highlight!' button to capture interesting moments in the video. Watch a highlight by clicking on it."><small>what is this?</small></a>
+                    </h2>
                     <button class="btn btn-large" id="add-highlight-button"><i class="icon-star"></i> Add a highlight!</button>
                     <div class="add-highlight" data-talk_id="<?php echo $talk->id; ?>" data-video_local_link="<?php echo $talk->video_local_link; ?>">
                         <span class='thumb'><img src='' class='img-rounded'></span>
@@ -154,7 +156,9 @@
                     </ul>
                 </div>                
                 <div class="span4">
-                    <h2>Table of Content</h2>
+                    <h2>Table of Content
+                        <a href="#" class="toc-help" data-trigger="hover" data-content="Watch any part you like by clicking on a chapter to start playing that part."><small>what is this?</small></a>
+                    </h2>
                     <ul class="pager">
                       <li class="previous">
                         <a href="#"><i class="icon-chevron-up"></i> Prev</a>
@@ -169,33 +173,6 @@
                             echo $label->getHTML();
                         }
                         ?>
-                        <li><a href="#"><i class="icon-chevron-down"></i>MOOC (Massive Open Online Course)</a></li>
-                        <ul>
-                            <li><a href="#">Udacity</a></li>
-                            <li><a href="#">Coursera</a></li>
-                            <li><a href="#">EdX</a></li>
-                        </ul>
-                        <li><a href="#">Outside School</a></li>
-                        <ul>
-                            <li>프로그래밍</li>
-                            <li>언어</li>
-                            <li>그래픽 디자인</li>
-                        </ul>
-                        <li>MOOC 의 핵심 요소</li>
-                        <ul>
-                            <li>짧은 비디오, 잦은 시험</li>
-                            <li>Peer Assessment</li>
-                            <li>Social</li>
-                            <li>Interactive</li>
-                            <li>Interactive Technologies</li>
-                            <li>Personalization</li>
-                        </ul>
-                        <li>Implications</li>
-                        <ul>
-                            <li>Flipped Classroom</li>
-                            <li>Open</li>
-                            <li>교육의 민주화</li>
-                        </ul>
                     </ul>
                 </div>
                 
@@ -224,6 +201,8 @@
 
         <script type="text/javascript">
         log.info(formatLog($("body").data("talk_id"), "anonymous", "view", "open", "page"));      
+        $(".highlights-help").popover();
+        $(".toc-help").popover();
 
           var _gaq = _gaq || [];
           _gaq.push(['_setAccount', 'UA-35846694-1']);

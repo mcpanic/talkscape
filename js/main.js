@@ -93,32 +93,33 @@ $(document).ready(function(){
         return false;
     });   
 
-    $(".toc li a").click(function(){
+    $(".toc").on("click", "li > a", function(){
         var seconds = Math.floor($(this).parent().data("start_at"));
         if (isInt(seconds))
             player.api("seekTo", seconds);
         log.info(formatLog($("body").data("talk_id"), "anonymous", "click", "toc", $(this).parent().data("id"))); 
+        return false;
     }); 
 
     $("#get-time-button").click(function(){
         player.api('getCurrentTime', function (value) {
             $("#form1 #start_at").val(Math.floor(value));
         });
-
+        return false;
     }); 
 
     $(".pager .previous").click(function(){
         var $active = $(".toc li.active").first();
-        $active.prev().find("a").trigger("click");
+        $active.prev().children(".main").trigger("click");
         log.info(formatLog($("body").data("talk_id"), "anonymous", "click", "toc-previous", "")); 
     });
 
     $(".pager .next").click(function(){
         var $active = $(".toc li.active").first();
         if ($active.length == 0) // if nothing is active, activate the first one.
-            $(".toc li").first().find("a").trigger("click");
+            $(".toc li").first().children(".main").trigger("click");
         else
-            $active.next().find("a").trigger("click");
+            $active.next().children(".main").trigger("click");
         log.info(formatLog($("body").data("talk_id"), "anonymous", "click", "toc-next", ""));
     });
 

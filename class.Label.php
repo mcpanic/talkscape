@@ -26,9 +26,9 @@ class Label{
 		$html = "";
 		$html .= "<li data-id='$this->id' data-start_at='$this->start_at'>"
 				. "<i class='icon-chevron-down open-detail'></i>" 
-				. "<a href='#'>"
+				. "<a href='#' class='main'>"
 				. "<span class='label'>" . getTimeDisplay($this->start_at) . "</span>"
-				. $this->title
+				. "<span class='title'>$this->title</span>"
 				. "</a><div class='detail'>"
 				. SmartyPants(Markdown($this->detail))
 				. "</div></li>";
@@ -39,13 +39,14 @@ class Label{
 		$html = "";
 		$html .= "<li data-id='$this->id' data-start_at='$this->start_at'>"
 				. "<i class='icon-chevron-down open-detail'></i>" 
-				. "<a href='#'>"
+				. "<a href='#' class='main'>"
 				. "<span class='label'>" . getTimeDisplay($this->start_at) . "</span>"
 				. "<span class='title'>$this->title</span>"
 				. "</a>"
 				. "<span class='update-link'><a href='#'>edit</a></span>"
 				. "<span class='delete-link'><a href='#'>delete</a></span>"
-				. "<div class='detail'>" . SmartyPants(Markdown($this->detail)) . "</div></li>";
+				. "<div class='detail'>" . SmartyPants(Markdown($this->detail)) . "</div>"
+				. "<div class='detail-raw'>$this->detail</div></li>";
 		return $html;		
 	}
 }

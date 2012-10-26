@@ -7,7 +7,7 @@ function _addZero($seconds){
 function getTimeDisplay($seconds){
   $text = "";
   if ($seconds >= 3600)  
-    $text = floor($seconds / 3600) . ":" . _addZero(floor($seconds / 60)) . ":" . _addZero($seconds % 60);
+    $text = floor($seconds / 3600) . ":" . _addZero(floor(($seconds % 3600)/60)) . ":" . _addZero($seconds % 60);
   else
     $text = floor($seconds / 60) . ":" . _addZero($seconds % 60);
   return $text;

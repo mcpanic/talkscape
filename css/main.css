@@ -15,16 +15,18 @@
 
 .toc .icon-chevron-down {
 	float: right;
-	margin-top: 25x;
+	margin-top: 15px;
 	margin-right: 5px;
 	opacity: .25;
+	cursor: pointer;
 }
 
 .toc .icon-chevron-up {
 	float: right;
-	margin-top: 5px;
+	margin-top: 10px;
 	margin-right: 5px;
 	opacity: .25;
+	cursor: pointer;
 }
 
 .toc .active .icon-chevron-down {
@@ -35,6 +37,10 @@
 	background-color: #eeeeee;
 	display: none;
 	padding: 10px;
+}
+
+.toc .detail-raw {
+	display: none;
 }
 
 /* Highlights */
@@ -90,3 +96,4 @@
 	opacity:0.8;
 	cursor: pointer;
 }
+

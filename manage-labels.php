@@ -39,7 +39,7 @@
         <link rel="stylesheet" href="/talkscape/css/bootstrap.min.css">
         <style>
             body {
-                padding-top: 450px;
+                padding-top: 500px;
                 padding-bottom: 40px;
             }
 
@@ -91,10 +91,23 @@
                     </div>
 
                     <div class="row">    
-                        <div class="span9">
-                        <iframe id="player1" src="<?php echo $talk->video_link; ?>?api=1&player_id=player1" width="700px" height="400px" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+                        <div class="span8">
+                        <h4><?php echo $talk->title; ?></h4>
+                        <iframe id="player1" src="<?php echo $talk->video_link; ?>?api=1&player_id=player1" width="100%" height="400px" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
                         </div>
-                        <div class="span3">
+                        <div class="span4">
+                            <!--
+                            <span class="fb-like" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" style="vertical-align:top;zoom:1;*display:inline"></span>
+                            <span>
+                            <a href="https://twitter.com/share" class="twitter-share-button" data-via="imjuhokim" data-hashtags="talkscape">Tweet</a>
+                            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                            </span>
+                            
+                            <span class='st_facebook_large' displayText='Facebook'></span>
+                            <span class='st_fblike_large' displayText='Facebook Like'></span>
+                            <span class='st_twitter_large' displayText='Tweet'></span>
+                            <span class='st_email_large' displayText='Email'></span>
+                            -->
                             <?php 
                                 echo $talk->getHTML();
                             ?>
@@ -112,10 +125,10 @@
                     <h2>Table of Content</h2>
                     <ul class="pager">
                       <li class="previous">
-                        <a href="#"><i class="icon-chevron-up"></i> 이전</a>
+                        <a href="#"><i class="icon-chevron-up"></i> Prev</a>
                       </li>
                       <li class="next">
-                        <a href="#">다음 <i class="icon-chevron-down"></i></a>
+                        <a href="#">Next <i class="icon-chevron-down"></i></a>
                       </li>
                     </ul>
                     <ul class="nav nav-list nav-stacked toc">
@@ -125,8 +138,6 @@
                         }
                         ?>
                     </ul>
-                    <p>Video status: <span class="status">...</span></p>
-                    <p><button>Play</button> <button>Pause</button></p>
                 </div>
                 
                 <div class="span6">
@@ -147,7 +158,7 @@
                         </div>
                     
 
-                        <label>Details</label>                                       
+                        <label>Details <small>(you can use the <a href="http://daringfireball.net/projects/markdown/basics">Markdown</a> syntax.)</small></label>                                       
                         <div id="epiceditor"></div>
                         <button class="btn btn-large btn-primary" id="save-button">Save</button>
                     </form>                    
@@ -167,8 +178,9 @@
 
         <script src="/talkscape/js/vendor/bootstrap.min.js"></script>        
         <script src="http://a.vimeocdn.com/js/froogaloop2.min.js"></script>
-        <script src="/talkscape/js/vendor/jquery.fitvids.js"></script>
+        <!--<script src="/talkscape/js/vendor/jquery.fitvids.js"></script>-->
         <script src="/talkscape/js/vendor/epiceditor/js/epiceditor.min.js"></script>
+        <script src="/talkscape/js/vendor/log4javascript.js"></script>
         <script src="/talkscape/js/utils.js"></script>
         <script src="/talkscape/js/main.js"></script>
         <script>
@@ -200,7 +212,8 @@
             editor.importFile("epiceditor", ""); 
                         
             /* attach a submit handler to the form */
-            $("#form1").submit(function(event) {
+            //$("#form1").submit(function(event) {
+            $(document).on("click", "#save-button", function(){
                 /* stop form from submitting normally */
                 event.preventDefault(); 
                 
@@ -222,6 +235,8 @@
                             $(obj.html).insertAfter($current).highlight();                    
                         else
                             $(obj.html).appendTo($(".toc")).highlight(); 
+
+                        recoverCreateMode();
                     }  
                   }
                 );
@@ -257,7 +272,7 @@
                 $("#form1 #start_at").val($li.data("start_at"));
                 $("#save-button").attr("id", "update-save-button");
                 $("#update-save-button").data("label-id", id);
-                editor.importFile("epiceditor", $li.find(".detail").html());
+                editor.importFile("epiceditor", $li.find(".detail-raw").html());
                 if ($("#update-cancel-button").length == 0)
                     $("<button class='btn btn-large' id='update-cancel-button'>Cancel</button>").insertAfter("#update-save-button");
                 return false;
