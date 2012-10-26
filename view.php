@@ -50,7 +50,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title><?php echo $talk->title; ?></title>
+        <title><?php echo $talk->speaker . ": " . $talk->title . " | TalkScape"; ?></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
@@ -156,8 +156,8 @@
                     </ul>
                 </div>                
                 <div class="span4">
-                    <h2>Table of Content
-                        <a href="#" class="toc-help" data-trigger="hover" data-content="Watch any part you like by clicking on a chapter to start playing that part."><small>what is this?</small></a>
+                    <h2>Chapters
+                        <a href="#" class="toc-help" data-trigger="hover" data-content="Watch any part you like in the talk. Click on a chapter to jump to that part."><small>what is this?</small></a>
                     </h2>
                     <ul class="pager">
                       <li class="previous">
