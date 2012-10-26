@@ -122,7 +122,7 @@
             <!-- Example row of columns -->
             <div class="row">
                 <div class="span6">
-                    <h2>Table of Content</h2>
+                    <h2>Chapters</h2>
                     <ul class="pager">
                       <li class="previous">
                         <a href="#"><i class="icon-chevron-up"></i> Prev</a>

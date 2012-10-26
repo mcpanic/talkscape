@@ -57,7 +57,7 @@
         <link rel="stylesheet" href="/talkscape/css/bootstrap.min.css">
         <style>
             body {
-                padding-top: 500px;
+                padding-top: 60px;
                 padding-bottom: 40px;
             }
         </style>
@@ -83,13 +83,14 @@
 
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
-                <div class="container">            
+                <div class="container">       
+                    <!--     
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    
+                    -->
                     <div class="row">
                         <a class="brand" href="/talkscape/">TalkScape</a>
                         <!--
@@ -103,17 +104,22 @@
                         -->
                     </div>
 
-                    <div class="row">    
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container container-player">
+
+                    <div class="row player">    
                         <div class="span8">
                         <h4><?php echo $talk->title; ?></h4>
                         <iframe id="player1" src="<?php echo $talk->video_link; ?>?api=1&player_id=player1" width="100%" height="400px" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
                         </div>
                         <div class="span4">
-                            <span class="fb-like" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" style="vertical-align:top;zoom:1;*display:inline"></span>
-                            <span>
-                            <a href="https://twitter.com/share" class="twitter-share-button" data-via="imjuhokim" data-hashtags="talkscape">Tweet</a>
-                            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-                            </span>
+
                             <!--
                             <span class='st_facebook_large' displayText='Facebook'></span>
                             <span class='st_fblike_large' displayText='Facebook Like'></span>
@@ -123,17 +129,18 @@
                             <?php 
                                 echo $talk->getHTML();
                             ?>
+                            <br>
+                            <span class="fb-like" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" style="vertical-align:top;zoom:1;*display:inline"></span>
+                            <span>
+                            <a href="https://twitter.com/share" class="twitter-share-button" data-via="imjuhokim" data-hashtags="talkscape">Tweet</a>
+                            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                            </span>                            
                         </div>
                     </div>
-
-
-                </div>
-            </div>
         </div>
-
-        <div class="container">
+        <div class="container container-features">
             <!-- Example row of columns -->
-            <div class="row">
+            <div class="row features">
                 <div class="span4">
                     <h2>Highlights 
                         <a href="#" class="highlights-help" data-trigger="hover" data-content="Click the 'Add a highlight!' button to capture interesting moments in the video. Watch a highlight by clicking on it."><small>what is this?</small></a>

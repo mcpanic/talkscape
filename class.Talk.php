@@ -30,7 +30,7 @@ class Talk{
 			. "<h5>$date <small>at $this->event</small></h5>";
 
 		if (isset($this->slides_link))
-			$html .= "<div><a class='btn' href='/talkscape/$this->slides_link' target='_blank'><i class='icon-download'></i> Slides</a></div>";
+			$html .= "<div class='slides'><a class='btn' href='/talkscape/$this->slides_link' target='_blank'><i class='icon-download'></i> Slides</a></div>";
 
 		$html .= "<div>$this->abstract</div>";
 		return $html;
