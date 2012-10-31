@@ -111,8 +111,8 @@
 
             <div class="row player">    
                 <div class="span8">
-                <h3><?php echo $talk->title; ?></h3>
-                <iframe id="player1" src="<?php echo $talk->video_link; ?>?api=1&player_id=player1" width="100%" height="400px" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+                    <h3 class="title"><?php echo $talk->title; ?></h3>
+                    <iframe id="player1" src="<?php echo $talk->video_link; ?>?api=1&player_id=player1" width="100%" height="400px" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
                 </div>
                 <div class="span4">
 
